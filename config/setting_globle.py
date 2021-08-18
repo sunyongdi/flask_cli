@@ -14,5 +14,5 @@ class SettingGloble(object):
     # SERVER_NAME = "server_name_aaa"
     PORT = 8090
     HOST = "0.0.0.0"
-    # ENV = 'development'
     ENV = 'development'
+    # ENV = 'production'

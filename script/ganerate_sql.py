@@ -10,7 +10,7 @@
 """
 
 from framework import db
-from app.demo.models.User import User
+from app.v1.models.User import User
 
 
 def initdb():

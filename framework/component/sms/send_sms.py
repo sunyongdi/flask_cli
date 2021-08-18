@@ -13,6 +13,7 @@ from config.setting_dev import DefaultConfig
 
 
 def send_message(mobile, code, etime):
+    # TODO 使用celery 解阻塞
     sdk = SmsSDK(DefaultConfig.ACCID, DefaultConfig.ACCTOKEN, DefaultConfig.APPID)
     tid = '1'  # 短信模版
     mobile = mobile

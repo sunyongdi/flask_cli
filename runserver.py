@@ -10,17 +10,16 @@
 
 import sys
 import os
-
-BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
-
-
-# 增加导包路径
-sys.path.insert(0, os.path.join(BASE_DIR, 'framework'))
 from config.setting_dev import DefaultConfig
 from flask import jsonify
 from framework import create_app
 
-app = create_app(DefaultConfig)
+BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
+
+# 增加导包路径
+sys.path.insert(0, os.path.join(BASE_DIR, ''))
+
+app = create_app(DefaultConfig, enable_config_file=True)
 
 
 @app.route('/')
@@ -34,4 +33,3 @@ def route_map():
 
 if __name__ == '__main__':
     app.run(debug=app.config['DEBUG_MODEL_SWITCH'], host=app.config['HOST'], port=app.config["PORT"])
-
