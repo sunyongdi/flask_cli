@@ -7,13 +7,15 @@
 """
 文件说明：
 """
+from config.setting_globle import SettingGloble
 
 
-class DefaultConfig(object):
+class DefaultConfig(SettingGloble):
     """
     Flask 默认配置
     """
-    SECRET_KEY = 'sunyongdi' # 加密
+    DEBUG_MODEL_SWITCH = True
+    SECRET_KEY = 'sunyongdi'  # 加密
 
     WTF_CSRF_ENABLED = False
     WTF_I8N_ENABLED = False
@@ -34,3 +36,22 @@ class DefaultConfig(object):
     }
     SQLALCHEMY_TRACK_MODIFICATIONS = False  # 追踪数据的修改信号
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+
+    # redis
+    REDIS_HOST = "127.0.0.1"
+    REDIS_PORT = 6379
+
+    # 容联云
+    ACCID = '8a216da8762cb457017674f5bdc41dd3'
+    ACCTOKEN = '9db6b1ab6c6e4312bf7efa1d41ca7da3'
+    APPID = '8a216da87b52cabc017b533a39c1004e'
+
+    ERROR_404_HELP = False
+
+    # 日志
+    LOGGING_LEVEL = 'DEBUG'
+    import os
+    BASE_DIR = os.path.dirname((os.path.abspath(__file__)))
+    LOGGING_FILE_DIR = '/Users/sunyongdi/Desktop/python/北大软件/flask学习/logs'
+    LOGGING_FILE_MAX_BYTES = 300 * 1024 * 1024
+    LOGGING_FILE_BACKUP = 10

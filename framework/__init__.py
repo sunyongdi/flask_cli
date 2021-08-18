@@ -8,7 +8,7 @@
 文件说明：框架
 """
 from flask import Flask
-from flask_login import LoginManager
+
 
 def create_flask_app(config, enable_config_file=False):
     """
@@ -41,7 +41,7 @@ def create_app(config, enable_config_file=False):
 
     # redis
     import redis
-    pool = redis.ConnectionPool(host='localhost', port=6379, decode_responses=True)
+    pool = redis.ConnectionPool(host=app.config['REDIS_HOST'], port=app.config['REDIS_PORT'], decode_responses=True)
     app.redis_pool = redis.Redis(connection_pool=pool)
 
     # 添加请求钩子
@@ -54,7 +54,24 @@ def create_app(config, enable_config_file=False):
     blueprint.register(app)
 
     #
-    logging_manage = LoginManager()
-    logging_manage.init_app(app)
+    # logging_manage = LoginManager()
+    # logging_manage.init_app(app)
+
+    # 配置
+    # import os
+    # from config.setting_logging import setting_logging
+    # logs_path = os.path.join(os.path.abspath(os.path.dirname(app.root_path)), 'logs')
+    # print('logs_path', logs_path)
+    # if not os.path.exists(logs_path):
+    #     os.makedirs(logs_path)
+    #
+    # setting_logging(app, logs_path)
+
+    # 配置日志
+    import os
+    from config.setting_logging import setup_log
+    logs_path = os.path.join(os.path.abspath(os.path.dirname(app.root_path)), 'logs')
+    if app.config['ENV'] != 'development':
+        setup_log(logs_path)
 
     return app
